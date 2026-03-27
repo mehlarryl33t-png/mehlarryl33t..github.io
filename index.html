@@ -4,87 +4,132 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Slawinski Mateusz Photo Art</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
-    }
+    * { margin:0; padding:0; box-sizing:border-box; }
 
     body {
-      background: #111;
-      color: #fff;
+      background:#0a0a0a;
+      color:#eee;
+      font-family:'Inter', sans-serif;
+      overflow-x:hidden;
+    }
+
+    h1,h2 {
+      font-family:'Playfair Display', serif;
+      letter-spacing:1px;
     }
 
     header {
-      padding: 20px;
-      text-align: center;
-      background: #000;
-      border-bottom: 1px solid #333;
+      height:100vh;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      background:linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.9)), url('https://via.placeholder.com/1600x900') center/cover;
     }
 
     header h1 {
-      font-size: 2.5em;
-      letter-spacing: 2px;
+      font-size:3.5rem;
+      margin-bottom:10px;
     }
 
     header p {
-      color: #aaa;
-      margin-top: 10px;
-    }
-
-    nav {
-      margin-top: 15px;
+      color:#bbb;
+      font-size:1.2rem;
+      margin-bottom:20px;
     }
 
     nav a {
-      color: #fff;
-      margin: 0 15px;
-      text-decoration: none;
-      transition: 0.3s;
+      margin:0 15px;
+      color:#ddd;
+      text-decoration:none;
+      font-size:0.9rem;
+      letter-spacing:2px;
+      text-transform:uppercase;
+      transition:0.3s;
     }
 
-    nav a:hover {
-      color: #f39c12;
-    }
+    nav a:hover { color:#fff; }
 
     .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 15px;
-      padding: 20px;
+      padding:60px 20px;
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(300px,1fr));
+      gap:20px;
+      max-width:1400px;
+      margin:auto;
     }
 
-    .gallery img {
-      width: 100%;
-      height: 250px;
-      object-fit: cover;
-      border-radius: 10px;
-      transition: transform 0.3s;
+    .photo {
+      position:relative;
+      overflow:hidden;
+      border-radius:12px;
+      cursor:pointer;
     }
 
-    .gallery img:hover {
-      transform: scale(1.05);
+    .photo img {
+      width:100%;
+      height:350px;
+      object-fit:cover;
+      transition:0.5s;
     }
+
+    .photo:hover img {
+      transform:scale(1.1);
+      filter:brightness(0.7);
+    }
+
+    .photo span {
+      position:absolute;
+      bottom:20px;
+      left:20px;
+      opacity:0;
+      transition:0.4s;
+      font-size:1.1rem;
+    }
+
+    .photo:hover span { opacity:1; }
 
     .about {
-      padding: 40px 20px;
-      text-align: center;
-      max-width: 800px;
-      margin: auto;
+      max-width:800px;
+      margin:80px auto;
+      text-align:center;
+      padding:0 20px;
     }
 
-    .about h2 {
-      margin-bottom: 20px;
+    .about p {
+      margin-top:20px;
+      color:#aaa;
+      line-height:1.6;
     }
 
     footer {
-      text-align: center;
-      padding: 20px;
-      border-top: 1px solid #333;
-      margin-top: 30px;
-      color: #777;
+      text-align:center;
+      padding:30px;
+      color:#666;
+      border-top:1px solid #222;
+    }
+
+    /* Lightbox */
+    .lightbox {
+      position:fixed;
+      top:0; left:0;
+      width:100%; height:100%;
+      background:rgba(0,0,0,0.9);
+      display:none;
+      justify-content:center;
+      align-items:center;
+      z-index:999;
+    }
+
+    .lightbox img {
+      max-width:90%;
+      max-height:90%;
     }
 
   </style>
@@ -92,8 +137,8 @@
 <body>
 
 <header>
-  <h1>Slawinski Mateusz Photo Art</h1>
-  <p>Moje portfolio fotograficzne</p>
+  <h1>Slawinski Mateusz</h1>
+  <p>Photo Art Portfolio</p>
   <nav>
     <a href="#gallery">Galeria</a>
     <a href="#about">O mnie</a>
@@ -102,29 +147,47 @@
 </header>
 
 <section id="gallery" class="gallery">
-  <!-- WRZUĆ TUTAJ ZDJĘCIA -->
-  <img src="https://via.placeholder.com/400" alt="Zdjęcie 1">
-  <img src="https://via.placeholder.com/400" alt="Zdjęcie 2">
-  <img src="https://via.placeholder.com/400" alt="Zdjęcie 3">
-  <img src="https://via.placeholder.com/400" alt="Zdjęcie 4">
+
+  <!-- DODAWAJ ZDJĘCIA TUTAJ -->
+  <div class="photo"><img src="https://via.placeholder.com/500" onclick="openLightbox(this.src)"><span>Projekt 1</span></div>
+  <div class="photo"><img src="https://via.placeholder.com/500" onclick="openLightbox(this.src)"><span>Projekt 2</span></div>
+  <div class="photo"><img src="https://via.placeholder.com/500" onclick="openLightbox(this.src)"><span>Projekt 3</span></div>
+
 </section>
 
 <section id="about" class="about">
   <h2>O mnie</h2>
   <p>
-    Cześć! Jestem Mateusz Sławiński i zajmuję się fotografią.
-    To moje miejsce, gdzie dzielę się swoimi pracami.
+    Jestem fotografem skupionym na emocjach, świetle i kompozycji.
+    Tworzę fotografie, które opowiadają historię i zatrzymują moment.
   </p>
 </section>
 
 <section id="contact" class="about">
   <h2>Kontakt</h2>
-  <p>Instagram: @https://www.instagram.com/larry_l33t.photo/</p>
+  <p>Email: twojemail@example.com</p>
+  <p>Instagram: @twojprofil</p>
 </section>
 
 <footer>
   <p>© 2026 Slawinski Mateusz Photo Art</p>
 </footer>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <img id="lightbox-img">
+</div>
+
+<script>
+  function openLightbox(src) {
+    document.getElementById('lightbox').style.display = 'flex';
+    document.getElementById('lightbox-img').src = src;
+  }
+
+  function closeLightbox() {
+    document.getElementById('lightbox').style.display = 'none';
+  }
+</script>
 
 </body>
 </html>
